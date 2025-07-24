@@ -47,7 +47,7 @@ app.delete('/usuarios/:id', (req, res) => {
 
     if (index !== -1) {
         ArrayDeUsuario.splice(index, 1);
-        res.send("Usuário excluído!");
+        res.status(200).send("Usuário excluído!");
     } else {
         res.status(404).send("Usuário não encontrado!");
     }
