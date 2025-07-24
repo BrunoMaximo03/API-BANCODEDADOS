@@ -41,6 +41,7 @@ app.get('/usuarios', (req, res) => {
 })
 
 
+
 app.delete('/usuarios/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const index = ArrayDeUsuario.findIndex(usuario => usuario.id === id);
