@@ -22,17 +22,36 @@
 
  */
 
+let proximoId = 1;
+
 app.post('/usuarios', (req, res) => {
-    
-    ArrayDeUsuario.push(req.body); // adiciona no array
-    res.send("Usuário criado!!");
+
+    const usuario = req.body;
+    usuario.id = proximoId++;
+    ArrayDeUsuario.push(usuario); // adiciona no array
+    res.status(201).json(req.body);
+
 })
 
 
 app.get('/usuarios', (req, res) => {
-    res.json(ArrayDeUsuario);
+
+    res.status(200).json(ArrayDeUsuario);
+
 })
 
+
+app.delete('/usuarios/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = ArrayDeUsuario.findIndex(usuario => usuario.id === id);
+
+    if (index !== -1) {
+        ArrayDeUsuario.splice(index, 1);
+        res.send("Usuário excluído!");
+    } else {
+        res.status(404).send("Usuário não encontrado!");
+    }
+});
 
 app.listen(3000) // faz o servidor Express "escutar" requisiçoes na porta 3000
 
